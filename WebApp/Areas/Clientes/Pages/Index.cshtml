@@ -1,10 +1,10 @@
 ﻿@page
 @using Microsoft.AspNetCore.Antiforgery
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model WebApp.Areas.Categorias.Pages.IndexModel
-
+@model WebApp.Areas.Clientes.Pages.IndexModel
 @inject IAntiforgery antiforgery
-@{ ViewData["Title"] = "Categorias ";
+@{ 
+    ViewData["Title"] = "Cliente";
     Layout = "_Layout";
     var tokenSet = antiforgery.GetAndStoreTokens(HttpContext); }
 
@@ -37,7 +37,7 @@
         <div class="card-header">
             <div class="card-title">Listado de @ViewData["Title"]</div>
             <div class="card-tools">
-                <a asp-area="Categorias" asp-page="Create" class="btn btn-outline-primary"><i class="fas fa-plus"></i> Nuevo Registro</a>
+                <a asp-area="Clientes" asp-page="Create" class="btn btn-outline-primary"><i class="fas fa-plus"></i> Nuevo Cliente</a>
             </div>
         </div>
         <div class="card-body table-responsive-md p-3">
@@ -79,22 +79,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (Model.Categorias.Count > 0)
+                    @if (Model.Clientes.Count > 0)
                     {
-                        @foreach (var item in Model.Categorias)
+                        @foreach (var item in Model.Clientes)
                         {
                             <tr>
                                 <td>@item.Nombre</td>
-                                <td style="width:8%" class="project-state text-center text-lg">
-                                    @if (item.Activo)
-                                    {
-                                        @Html.Raw("<span class='badge bg-success'>Activo</span>") }
-                                    else
-                                    {
-                                        @Html.Raw("<span class='badge bg-default'>Inactivo</span>")}
-                                </td>
+
                                 <td style="width:20%" class="project-actions text-center">
-                                    <a class="btn btn-info btn-sm" title="Editar" asp-area="Categorias" asp-page="Edit" asp-route-id="@item.Id">
+                                    <a class="btn btn-info btn-sm" title="Editar" asp-area="clientes" asp-page="Edit" asp-route-id="@item.Id">
                                         <i class="fas fa-pencil-alt">
                                         </i>
                                     </a>

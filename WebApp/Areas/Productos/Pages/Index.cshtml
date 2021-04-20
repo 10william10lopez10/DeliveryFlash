@@ -1,10 +1,9 @@
 ﻿@page
 @using Microsoft.AspNetCore.Antiforgery
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model WebApp.Areas.Clientes.Pages.IndexModel
+@model WebApp.Areas.Productos.Pages.IndexModel
 @inject IAntiforgery antiforgery
-@{ 
-    ViewData["Title"] = "Cliente";
+@{ ViewData["Title"] = "Productos ";
     Layout = "_Layout";
     var tokenSet = antiforgery.GetAndStoreTokens(HttpContext); }
 
@@ -37,7 +36,7 @@
         <div class="card-header">
             <div class="card-title">Listado de @ViewData["Title"]</div>
             <div class="card-tools">
-                <a asp-area="Clientes" asp-page="Create" class="btn btn-outline-primary"><i class="fas fa-plus"></i> Nuevo Cliente</a>
+                <a asp-area="Productos" asp-page="Create" class="btn btn-outline-primary"><i class="fas fa-plus"></i> Nuevo Producto</a>
             </div>
         </div>
         <div class="card-body table-responsive-md p-3">
@@ -50,11 +49,11 @@
                                 if (Model.UIPagination.GetPageSize == item)
                                 {
                                     <option selected value="@item">@item</option>
-                                }
+ }
                                 else
                                 {
                                     <option value="@item">@item</option>
-                                }
+}
                             }
                         </select>
                     </div>
@@ -74,20 +73,27 @@
                 <thead class="thead-dark">
                     <tr>
                         <th>Nombre</th>
-                        <th style="width:8%" class="text-center">Estado</th>
+                        <th style="width:8%" class="text-center">Servicio</th>
                         <th style="width:20%" class="text-center">Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @if (Model.Clientes.Count > 0)
+                    @if (Model.Productos.Count > 0)
                     {
-                        @foreach (var item in Model.Clientes)
+                        @foreach (var item in Model.Productos)
                         {
                             <tr>
                                 <td>@item.Nombre</td>
-
+                                <td style="width:8%" class="project-state text-center text-lg">
+                                    @if (item.EsServicio)
+                                    {
+                                        @Html.Raw("<span class='badge bg-success'>Activo</span>") }
+                                    else
+                                    {
+                                        @Html.Raw("<span class='badge bg-default'>Inactivo</span>")}
+                                </td>
                                 <td style="width:20%" class="project-actions text-center">
-                                    <a class="btn btn-info btn-sm" title="Editar" asp-area="clientes" asp-page="Edit" asp-route-id="@item.Id">
+                                    <a class="btn btn-info btn-sm" title="Editar" asp-area="Productos" asp-page="Edit" asp-route-id="@item.Id">
                                         <i class="fas fa-pencil-alt">
                                         </i>
                                     </a>
@@ -97,13 +103,13 @@
                                     </a>
                                 </td>
                             </tr>
-                        } }
+} }
                     else
                     {
                         <tr>
                             <td colspan="5" class="text-center">No se encontraron Registros</td>
                         </tr>
-                    }
+}
 
                 </tbody>
             </table>
@@ -121,11 +127,11 @@
     <script src="~/plugins/sweetalert2/sweetalert2.min.js"></script>
     <script type="text/javascript" language=javascript>
         $(document).ready(function () {
-            $('#a-cliente').addClass('active');
+            $('#a-productos').addClass('active');
 
           jQueryModalDelete = (url) => {
                 Swal.fire({
-                    title: '¿Esta seguro que quiere eliminar el registro?',
+                    title: '¿Esta seguro que quiere eliminar este producto?',
                     text: "¡Este proceso es irreversible!",
                     icon: 'warning',
                     showCancelButton: true,
